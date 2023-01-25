@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Love Calculator</string>
+    <string name="the_meaning_of_life">The meaning of life is to be happy</string>
+    <string name="enter_couple_names">Enter the names of the couple who want to bring together 👩🏻‍❤‍👨🏻</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
