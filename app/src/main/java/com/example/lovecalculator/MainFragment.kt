@@ -1,19 +1,18 @@
 package com.example.lovecalculator
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.lovecalculator.databinding.FragmentMainBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.lovecalculator.viewmodel.LoveViewModel
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
+    private val viewModel: LoveViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,25 +29,14 @@ class MainFragment : Fragment() {
     private fun initClickers() {
         with(binding) {
             btnHeart.setOnClickListener {
-                RetrofitService().api.calculateLove(
-                    edFirst.text.toString(),
-                    etSecond.text.toString()
-                ).enqueue(object : Callback<LoveModel> {
-
-                    override fun onResponse(call: Call<LoveModel>, response: Response<LoveModel>) {
-                        if (response.isSuccessful) {
-                            Log.e("ololo", "onResponse: ${response.body()?.result}")
-                            response.body()
-                            val bundle = Bundle()
-                            bundle.putSerializable("response",response.body())
-                            findNavController().navigate(R.id.resultFragment, bundle)
-                        }
+                viewModel.getLiveLove(etFirst.text.toString(), etSecond.text.toString())
+                    .observe(
+                        viewLifecycleOwner
+                    ) {
+                        val bundle = Bundle()
+                        bundle.putSerializable("response", it)
+                        findNavController().navigate(R.id.resultFragment, bundle)
                     }
-
-                    override fun onFailure(call: Call<LoveModel>, t: Throwable) {
-                        Log.e("ololo", "onResponse: ${t.message}")
-                    }
-                })
             }
         }
     }
