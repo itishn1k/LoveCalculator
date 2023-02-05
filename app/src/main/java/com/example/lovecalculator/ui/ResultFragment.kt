@@ -1,4 +1,4 @@
-package com.example.lovecalculator
+package com.example.lovecalculator.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.lovecalculator.databinding.FragmentResultBinding
 import com.example.lovecalculator.remote.LoveModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ResultFragment : Fragment() {
     private lateinit var binding: FragmentResultBinding
     override fun onCreateView(
@@ -16,7 +18,6 @@ class ResultFragment : Fragment() {
     ): View {
         binding = FragmentResultBinding.inflate(layoutInflater)
         return binding.root
-
     }
 
     @Suppress("DEPRECATION")

@@ -1,4 +1,4 @@
-package com.example.lovecalculator
+package com.example.lovecalculator.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.lovecalculator.R
 import com.example.lovecalculator.databinding.FragmentMainBinding
 import com.example.lovecalculator.viewmodel.LoveViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private val viewModel: LoveViewModel by viewModels()
@@ -30,9 +33,7 @@ class MainFragment : Fragment() {
         with(binding) {
             btnHeart.setOnClickListener {
                 viewModel.getLiveLove(etFirst.text.toString(), etSecond.text.toString())
-                    .observe(
-                        viewLifecycleOwner
-                    ) {
+                    .observe(viewLifecycleOwner) {
                         val bundle = Bundle()
                         bundle.putSerializable("response", it)
                         findNavController().navigate(R.id.resultFragment, bundle)

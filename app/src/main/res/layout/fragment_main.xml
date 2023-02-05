@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:paddingHorizontal="64dp"
     android:paddingVertical="80dp"
-    tools:context=".MainFragment">
+    tools:context=".ui.MainFragment">
 
     <TextView
         android:id="@+id/tv_person_one"
